@@ -54,26 +54,26 @@ That makes it useful not only for vulnerability hunting, but also for patching, 
 
 ## Quick Start
 
-Recommended repository name: `eresus-appsec-skills`
+Recommended repository name: `appsec-skills`
 
 ### Install From Git
 
 ```bash
 # Claude Code
-git clone https://github.com/EresusSecurity/eresus-appsec-skills.git
-cp -r eresus-appsec-skills/skills/eresus-sast-scanner/ ~/.claude/skills/
-cp -r eresus-appsec-skills/skills/eresus-remediator/ ~/.claude/skills/
-cp -r eresus-appsec-skills/skills/eresus-pr-security-review/ ~/.claude/skills/
-cp -r eresus-appsec-skills/skills/eresus-threat-modeler/ ~/.claude/skills/
-cp -r eresus-appsec-skills/skills/eresus-serialization-review/ ~/.claude/skills/
+git clone https://github.com/EresusSecurity/appsec-skills.git
+cp -r appsec-skills/skills/eresus-sast-scanner/ ~/.claude/skills/
+cp -r appsec-skills/skills/eresus-remediator/ ~/.claude/skills/
+cp -r appsec-skills/skills/eresus-pr-security-review/ ~/.claude/skills/
+cp -r appsec-skills/skills/eresus-threat-modeler/ ~/.claude/skills/
+cp -r appsec-skills/skills/eresus-serialization-review/ ~/.claude/skills/
 
 # OpenAI Codex
-git clone https://github.com/EresusSecurity/eresus-appsec-skills.git
-cp -r eresus-appsec-skills/skills/eresus-sast-scanner/ ~/.codex/skills/
-cp -r eresus-appsec-skills/skills/eresus-remediator/ ~/.codex/skills/
-cp -r eresus-appsec-skills/skills/eresus-pr-security-review/ ~/.codex/skills/
-cp -r eresus-appsec-skills/skills/eresus-threat-modeler/ ~/.codex/skills/
-cp -r eresus-appsec-skills/skills/eresus-serialization-review/ ~/.codex/skills/
+git clone https://github.com/EresusSecurity/appsec-skills.git
+cp -r appsec-skills/skills/eresus-sast-scanner/ ~/.codex/skills/
+cp -r appsec-skills/skills/eresus-remediator/ ~/.codex/skills/
+cp -r appsec-skills/skills/eresus-pr-security-review/ ~/.codex/skills/
+cp -r appsec-skills/skills/eresus-threat-modeler/ ~/.codex/skills/
+cp -r appsec-skills/skills/eresus-serialization-review/ ~/.codex/skills/
 ```
 
 ### Manual Install
@@ -233,7 +233,7 @@ The core scanner includes built-in knowledge for **34 vulnerability classes**.
 ## Repository Structure
 
 ```text
-eresus-appsec-skills/
+appsec-skills/
 ├── README.md
 ├── LICENSE
 ├── assets/
