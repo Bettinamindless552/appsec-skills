@@ -1,0 +1,35 @@
+{
+  "name": "@eresus/appsec-skills",
+  "version": "1.4.0",
+  "description": "Production-oriented AI security skills for code vulnerability analysis, threat modeling, remediation, and manual exploit-chain discovery",
+  "bin": {
+    "eresus-install": "./scripts/install.mjs"
+  },
+  "scripts": {
+    "install-skills": "node scripts/install.mjs"
+  },
+  "keywords": [
+    "security",
+    "appsec",
+    "sast",
+    "code-review",
+    "vulnerability",
+    "claude-code",
+    "codex",
+    "antigravity",
+    "ai-skill",
+    "owasp",
+    "exploit",
+    "threat-model"
+  ],
+  "author": "EresusSecurity",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EresusSecurity/appsec-skills.git"
+  },
+  "homepage": "https://github.com/EresusSecurity/appsec-skills",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

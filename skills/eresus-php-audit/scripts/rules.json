@@ -1,0 +1,313 @@
+{
+  "meta": {
+    "source": "Eresus Extensions",
+    "version": "1.0",
+    "description": "Programmatic rule database for PHP security auditing"
+  },
+  "categories": {
+    "CVI-1xxx": "Injection",
+    "CVI-2xxx": "Deserialization",
+    "CVI-3xxx": "Authentication & Authorization",
+    "CVI-4xxx": "Configuration & Information Disclosure"
+  },
+  "rules": [
+    {
+      "id": "CVI-1001",
+      "name": "ssrf",
+      "severity": "HIGH",
+      "language": "php",
+      "sinks": [
+        "curl_setopt",
+        "file_get_contents",
+        "fopen"
+      ],
+      "pattern": "curl_setopt\\s*\\(.*CURLOPT_URL",
+      "description": "SSRF via cURL or file functions"
+    },
+    {
+      "id": "CVI-1002",
+      "name": "sql_injection",
+      "severity": "CRITICAL",
+      "language": "php",
+      "sinks": [
+        "mysql_query",
+        "mysqli_query",
+        "->query(",
+        "$wpdb->query("
+      ],
+      "pattern": "query\\s*\\(.*\\$",
+      "description": "SQL injection via string interpolation"
+    },
+    {
+      "id": "CVI-1003",
+      "name": "command_injection",
+      "severity": "CRITICAL",
+      "language": "php",
+      "sinks": [
+        "system",
+        "exec",
+        "passthru",
+        "shell_exec",
+        "popen",
+        "proc_open",
+        "pcntl_exec"
+      ],
+      "pattern": "system\\s*\\(|exec\\s*\\(|passthru\\s*\\(|shell_exec\\s*\\(",
+      "description": "OS command injection"
+    },
+    {
+      "id": "CVI-1004",
+      "name": "code_injection",
+      "severity": "CRITICAL",
+      "language": "php",
+      "sinks": [
+        "eval",
+        "assert",
+        "preg_replace",
+        "create_function",
+        "call_user_func"
+      ],
+      "pattern": "eval\\s*\\(|assert\\s*\\(|create_function\\s*\\(",
+      "description": "PHP code injection"
+    },
+    {
+      "id": "CVI-1005",
+      "name": "xss",
+      "severity": "HIGH",
+      "language": "php",
+      "sinks": [
+        "echo",
+        "print",
+        "printf"
+      ],
+      "pattern": "echo\\s+\\$_|print\\s+\\$_",
+      "description": "Cross-site scripting via unescaped output"
+    },
+    {
+      "id": "CVI-1006",
+      "name": "file_inclusion",
+      "severity": "CRITICAL",
+      "language": "php",
+      "sinks": [
+        "include",
+        "include_once",
+        "require",
+        "require_once"
+      ],
+      "pattern": "include\\s*\\(\\s*\\$|require\\s*\\(\\s*\\$",
+      "description": "Local/Remote file inclusion"
+    },
+    {
+      "id": "CVI-1007",
+      "name": "file_operations",
+      "severity": "HIGH",
+      "language": "php",
+      "sinks": [
+        "file_put_contents",
+        "unlink",
+        "copy",
+        "rename",
+        "move_uploaded_file"
+      ],
+      "pattern": "file_put_contents\\s*\\(\\s*\\$|unlink\\s*\\(\\s*\\$",
+      "description": "Arbitrary file operations"
+    },
+    {
+      "id": "CVI-1008",
+      "name": "xxe",
+      "severity": "HIGH",
+      "language": "php",
+      "sinks": [
+        "loadXML",
+        "simplexml_load_string",
+        "DOMDocument"
+      ],
+      "pattern": "loadXML\\s*\\(|simplexml_load_string\\s*\\(",
+      "description": "XML External Entity injection"
+    },
+    {
+      "id": "CVI-2001",
+      "name": "php_object_injection",
+      "severity": "CRITICAL",
+      "language": "php",
+      "sinks": [
+        "unserialize"
+      ],
+      "pattern": "unserialize\\s*\\(",
+      "description": "PHP object injection via unserialize"
+    },
+    {
+      "id": "CVI-2002",
+      "name": "pop_chain_gadget",
+      "severity": "CRITICAL",
+      "language": "php",
+      "sinks": [
+        "__wakeup",
+        "__destruct",
+        "__toString",
+        "__call"
+      ],
+      "pattern": "function\\s+__destruct|function\\s+__wakeup|function\\s+__toString",
+      "description": "POP chain gadget class"
+    },
+    {
+      "id": "CVI-3001",
+      "name": "auth_bypass_type_juggling",
+      "severity": "HIGH",
+      "language": "php",
+      "sinks": [
+        "=="
+      ],
+      "pattern": "password.*==|\\$hash.*==",
+      "description": "Authentication bypass via type juggling"
+    },
+    {
+      "id": "CVI-3002",
+      "name": "session_security",
+      "severity": "MEDIUM",
+      "language": "php",
+      "sinks": [
+        "session_set_cookie_params",
+        "setcookie",
+        "session_id"
+      ],
+      "pattern": "session_id\\s*\\(\\s*\\$_|setcookie.*secure.*false",
+      "description": "Insecure session/cookie configuration"
+    },
+    {
+      "id": "CVI-3003",
+      "name": "csrf_missing",
+      "severity": "MEDIUM",
+      "language": "php",
+      "sinks": [
+        "$_POST"
+      ],
+      "pattern": "\\$_POST\\[",
+      "description": "Missing CSRF token verification"
+    },
+    {
+      "id": "CVI-4001",
+      "name": "information_disclosure",
+      "severity": "LOW",
+      "language": "php",
+      "sinks": [
+        "phpinfo",
+        "var_dump",
+        "print_r"
+      ],
+      "pattern": "phpinfo\\s*\\(|var_dump\\s*\\(",
+      "description": "Information disclosure"
+    },
+    {
+      "id": "CVI-4002",
+      "name": "hardcoded_secrets",
+      "severity": "HIGH",
+      "language": "php",
+      "sinks": [
+        "define",
+        "="
+      ],
+      "pattern": "DB_PASSWORD|API_KEY|SECRET_KEY|\\$password\\s*=\\s*['\"]",
+      "description": "Hardcoded credentials"
+    },
+    {
+      "id": "CVI-5001",
+      "name": "wp_is_admin_misuse",
+      "severity": "HIGH",
+      "language": "php",
+      "framework": "wordpress",
+      "sinks": [
+        "is_admin"
+      ],
+      "pattern": "if\\s*\\(\\s*is_admin\\s*\\(\\)",
+      "description": "WordPress is_admin() used for privilege check (wrong — checks admin page, not user role)"
+    },
+    {
+      "id": "CVI-5002",
+      "name": "wp_nonce_missing",
+      "severity": "MEDIUM",
+      "language": "php",
+      "framework": "wordpress",
+      "sinks": [
+        "wp_ajax_"
+      ],
+      "pattern": "add_action.*wp_ajax_",
+      "description": "WordPress AJAX handler — verify nonce exists"
+    },
+    {
+      "id": "CVI-5003",
+      "name": "wp_sqli",
+      "severity": "CRITICAL",
+      "language": "php",
+      "framework": "wordpress",
+      "sinks": [
+        "$wpdb->query"
+      ],
+      "pattern": "\\$wpdb->query\\s*\\(\\s*[\"'].*\\$",
+      "description": "WordPress DB query without $wpdb->prepare()"
+    },
+    {
+      "id": "CVI-5004",
+      "name": "wp_rest_api_open",
+      "severity": "HIGH",
+      "language": "php",
+      "framework": "wordpress",
+      "sinks": [
+        "register_rest_route"
+      ],
+      "pattern": "__return_true",
+      "description": "WordPress REST API with open permission_callback"
+    },
+    {
+      "id": "CVI-6001",
+      "name": "laravel_mass_assignment",
+      "severity": "HIGH",
+      "language": "php",
+      "framework": "laravel",
+      "sinks": [
+        "create",
+        "update",
+        "fill"
+      ],
+      "pattern": "\\$guarded\\s*=\\s*\\[\\s*\\]|\\$fillable.*\\*",
+      "description": "Laravel mass assignment — empty $guarded or wildcard $fillable"
+    },
+    {
+      "id": "CVI-6002",
+      "name": "laravel_blade_raw",
+      "severity": "HIGH",
+      "language": "php",
+      "framework": "laravel",
+      "sinks": [
+        "{!! !!}"
+      ],
+      "pattern": "\\{!!.*\\$",
+      "description": "Laravel Blade raw output — XSS"
+    },
+    {
+      "id": "CVI-6003",
+      "name": "laravel_debug_prod",
+      "severity": "HIGH",
+      "language": "php",
+      "framework": "laravel",
+      "sinks": [
+        ".env"
+      ],
+      "pattern": "APP_DEBUG=true",
+      "description": "Laravel debug mode in production"
+    },
+    {
+      "id": "CVI-6004",
+      "name": "laravel_queue_deser",
+      "severity": "MEDIUM",
+      "language": "php",
+      "framework": "laravel",
+      "sinks": [
+        "dispatch",
+        "Queue::push"
+      ],
+      "pattern": "dispatch\\(|Queue::push\\(",
+      "description": "Laravel queue job deserialization — check if job data is trusted"
+    }
+  ]
+}

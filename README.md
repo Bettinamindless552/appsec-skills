@@ -33,10 +33,16 @@ Supported language families include **Java, Python, JavaScript/TypeScript, PHP, 
 | Skill | Primary Use |
 |------|-------------|
 | `eresus-sast-scanner` | Full-repo or targeted SAST scan across 34 vulnerability classes |
+| `eresus-manual-security-audit` | Manual security code review with exploit-chain discovery, adversarial reasoning, and trust boundary analysis |
 | `eresus-remediator` | Patch confirmed findings with root-cause-focused fixes |
 | `eresus-pr-security-review` | Review PRs and changed files for newly introduced security issues |
 | `eresus-threat-modeler` | Model attack paths, trust boundaries, and high-risk workflows before scanning or implementation |
 | `eresus-serialization-review` | Deep review of deserialization, parser abuse, object mapping, and state-transfer risks |
+| `eresus-variant-analysis` | GHSA/CVE variant analysis — find all instances of a known vulnerability pattern across the codebase |
+| `eresus-codeql-heuristics` | Language-specific sink/source reference derived from CodeQL Community Packs query suites |
+| `eresus-deser-audit` | Deserialization gadget chain knowledge and exploitation methodology for all major languages |
+| `eresus-python-audit` | Python-specific audit with full Bandit B101-B704 coverage, Django/Flask/FastAPI checks, and ML attack surface |
+| `eresus-php-audit` | PHP-specific audit with Kunlun-M CVI rules, POP chain discovery, and Laravel/WordPress/Symfony checks |
 
 ## Why This Suite
 
@@ -56,12 +62,35 @@ That makes it useful not only for vulnerability hunting, but also for patching, 
 
 Recommended repository name: `appsec-skills`
 
+### Install via npx (Recommended)
+
+```bash
+# Interactive — prompts you to select your agent
+npx @eresus/appsec-skills
+
+# Direct — specify your agent
+npx @eresus/appsec-skills --agent claude
+npx @eresus/appsec-skills --agent codex
+npx @eresus/appsec-skills --agent antigravity
+npx @eresus/appsec-skills --agent cursor
+
+# Install specific skills only
+npx @eresus/appsec-skills --agent claude --skills sast,audit,threat
+
+# Custom directory
+npx @eresus/appsec-skills --dir /path/to/your/skills
+
+# List available skills
+npx @eresus/appsec-skills --list
+```
+
 ### Install From Git
 
 ```bash
 # Claude Code
 git clone https://github.com/EresusSecurity/appsec-skills.git
 cp -r appsec-skills/skills/eresus-sast-scanner/ ~/.claude/skills/
+cp -r appsec-skills/skills/eresus-manual-security-audit/ ~/.claude/skills/
 cp -r appsec-skills/skills/eresus-remediator/ ~/.claude/skills/
 cp -r appsec-skills/skills/eresus-pr-security-review/ ~/.claude/skills/
 cp -r appsec-skills/skills/eresus-threat-modeler/ ~/.claude/skills/
@@ -70,6 +99,7 @@ cp -r appsec-skills/skills/eresus-serialization-review/ ~/.claude/skills/
 # OpenAI Codex
 git clone https://github.com/EresusSecurity/appsec-skills.git
 cp -r appsec-skills/skills/eresus-sast-scanner/ ~/.codex/skills/
+cp -r appsec-skills/skills/eresus-manual-security-audit/ ~/.codex/skills/
 cp -r appsec-skills/skills/eresus-remediator/ ~/.codex/skills/
 cp -r appsec-skills/skills/eresus-pr-security-review/ ~/.codex/skills/
 cp -r appsec-skills/skills/eresus-threat-modeler/ ~/.codex/skills/
@@ -83,6 +113,7 @@ Copy the skill directories you want into your agent's skills folder:
 ```bash
 # Claude Code
 cp -r skills/eresus-sast-scanner/ ~/.claude/skills/
+cp -r skills/eresus-manual-security-audit/ ~/.claude/skills/
 cp -r skills/eresus-remediator/ ~/.claude/skills/
 cp -r skills/eresus-pr-security-review/ ~/.claude/skills/
 cp -r skills/eresus-threat-modeler/ ~/.claude/skills/
@@ -90,6 +121,7 @@ cp -r skills/eresus-serialization-review/ ~/.claude/skills/
 
 # OpenAI Codex
 cp -r skills/eresus-sast-scanner/ ~/.codex/skills/
+cp -r skills/eresus-manual-security-audit/ ~/.codex/skills/
 cp -r skills/eresus-remediator/ ~/.codex/skills/
 cp -r skills/eresus-pr-security-review/ ~/.codex/skills/
 cp -r skills/eresus-threat-modeler/ ~/.codex/skills/
@@ -101,6 +133,7 @@ cp -r skills/eresus-serialization-review/ ~/.codex/skills/
 | Goal | Recommended Skill |
 |------|-------------------|
 | Audit a repository for security bugs | `eresus-sast-scanner` |
+| Deep manual audit with exploit-chain discovery | `eresus-manual-security-audit` |
 | Review a pull request or changed files | `eresus-pr-security-review` |
 | Patch a confirmed vulnerability | `eresus-remediator` |
 | Threat model a new feature or service | `eresus-threat-modeler` |
@@ -199,6 +232,8 @@ The core scanner includes built-in knowledge for **34 vulnerability classes**.
 ## Professional Usage Patterns
 
 - Use `eresus-threat-modeler` before auditing large features so the scan starts from the right trust boundaries.
+- Use `eresus-manual-security-audit` for depth-first adversarial review of security-critical components — auth, callbacks, middleware, tool execution, and trust boundaries.
+- Use `eresus-manual-security-audit` with the `[TeachMe]` token to train junior engineers on secure coding patterns while performing a real audit.
 - Use `eresus-pr-security-review` during code review to focus on newly introduced attack surface instead of re-auditing the whole repository.
 - Use `eresus-remediator` after a confirmed finding to drive minimal, production-safe patches.
 - Use `eresus-serialization-review` when the system relies on session blobs, queues, import/export features, or dynamic parser configuration.
@@ -236,13 +271,18 @@ The core scanner includes built-in knowledge for **34 vulnerability classes**.
 appsec-skills/
 ├── README.md
 ├── LICENSE
+├── package.json
 ├── assets/
 │   ├── eresus-banner.svg
 │   └── eresus-logo.svg
+├── scripts/
+│   └── install.mjs
 └── skills/
     ├── eresus-sast-scanner/
     │   ├── SKILL.md
     │   └── references/
+    ├── eresus-manual-security-audit/
+    │   └── SKILL.md
     ├── eresus-remediator/
     │   └── SKILL.md
     ├── eresus-pr-security-review/
